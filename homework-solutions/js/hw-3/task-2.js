@@ -4,3 +4,5 @@
 n + nn + nnn, где n не перемножаются, а конкатенируются
 
 */
+const n = 2;
+console.log(n + Number(n + '' + n) + Number(n + '' + n + '' + n));
