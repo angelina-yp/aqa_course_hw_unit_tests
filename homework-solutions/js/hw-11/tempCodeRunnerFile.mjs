@@ -106,9 +106,7 @@ class Company {
     this.#employees.splice(index, 1);
    // console.log(`Employee "${firstName}" has been removed.`);
   }
-  getEmployees() {
-    return this.#employees;
-  }
+ 
   addEmployee(employee) {
     if (!(employee instanceof Employee)) {
       throw new Error("Invalid employee");
@@ -134,6 +132,3 @@ company.addEmployee(emp3);
 console.log(company.getTotalSalary()); // 12000
 console.log(company.findEmployeeByName("Jane")); // Employee { firstName: 'Jane', ... }
 company.removeEmployee("John");
-console.log(company.getEmployees()); // [Employee, Employee]
-
-export { Employee, Company };
