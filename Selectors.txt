@@ -1,0 +1,86 @@
+  <!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        span {
+            border: 1px solid red;
+            display: block;
+            width: 100px;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+<div class="content">
+    <div class="form" style="margin: 20px;">
+        <h2>Leave your comments</h2>
+        <textarea type="text" placeholder="comment"></textarea>
+        <div name="comments"></div>
+        <button id="submit" onclick="writeComment()">Add comment</button>
+        <button onclick="removeComments()">Remove comment</button>
+    </div>
+</div>
+<br>
+<div class=text style="margin: 20px;">
+    <h2>Texts</h2>
+    <span class="txt">First text</span>
+    <span class="txt">Second text</span>
+    <span class="one two"> Multiclass   text </span>
+    <span class="one three"> Multiclass   text </span>
+    <!--    $x("//span[@multitag]/.='Multitag text'") - вернет true, т.к. конкатенирует все строковые предстваления узлов-->
+    <!--    $x("//span[@multitag]/text()='.'") - вернет true т.к. всегда возвращает true если текст хотя бы одной из ноды совпадает-->
+    <!--    но некоторые другие функции например contains берут только первое значение и игнорят остальные-->
+    <!--    $x("//span[@multitag]/text()[2]") - вернет второй узел из 3-х -->
+    <span class="txt" multitag="on">Multitag <br>text<br>.</span>
+    <!--    $x("//span[contains(.,'Multitag text2')]")-->
+    <span class="txt" multitag2="on">Multitag <b>text2</b></span>
+    <span class="content">Content text #1</span>
+    <span class="content">Content text #2</span>
+    <button class="content">Content</button>
+
+</div>
+</body>
+<script>
+    const comment = document.getElementsByTagName('textarea')[0].value;
+    const comments = document.getElementsByName('comments')[0];
+
+    function writeComment() {
+        comments.innerText = 'wait for comment...'
+        setTimeout(() => {
+            comments.innerHTML = '';
+            comments.innerHTML = comments.innerHTML + '<p>comment</p>';
+        }, 2000)
+    }
+
+    function removeComments() {
+        comments.innerText = '';
+    }
+</script>
+</html>
+
+  TASK:
+
+  1.Xpath/CSS: элемент с id - ‘submit’
+Xpath: //*[@id='submit']
+CSS: #submit
+  2.Xpath/CSS: все элементы с классом ‘txt’ 
+Xpath: //*[contains(@class, "txt")]
+CSS: .txt
+  3.Xpath: первый элемент с классом ‘txt’
+(//*[@class="txt"])[1]
+  4.Xpath: кнопку которая содержит текст: ‘Remove comment’
+//button[contains(text(), 'Remove comment')]
+  5.Xpath: первый элемент с классом ‘one’ 
+(//span[contains(@class, "one")])[1]
+  6.Xpath/CSS: элемент с атрибутом ‘multitag2’ и значением  ‘on’ 
+Xpath: //*[@multitag2="on"]
+CSS: [multitag2="on"]  
+  7.Xpath/CSS: всех детей элемента ‘div’ с классом ‘content’
+Xpath: //div[@class="content"]
+CSS: div.content   
+  8.CSS: все элементы ‘span’ и  ‘button’ с классом ‘content’ 
+span.content, button.content
+  9.Xpath: используя за основу селектор //*[@id='submit'] найти элемент body 
+//*[@id='submit']/ancestor::body
